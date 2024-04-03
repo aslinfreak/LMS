@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Learning.Models.StudentsDetail>
+
+@{
+    ViewBag.Title = "StudentView";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+
+}
+
+<h2>StudentView</h2>
+
+<style>
+
+    /* Basic styling */
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        padding: 20px;
+    }
+
+    .studentdetails {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .studentdetails h3 {
+            margin: 10px 0;
+        }
+
+        .studentdetails p {
+            color: #555;
+        }
+</style>
+
+<body>
+
+
+    @foreach (var item in Model)
+
+    {
+
+        <div class="studentdetails">
+
+
+            <h3>Student Details</h3>
+
+            <p>First Name:@item.FirstName<br>Last Name:@item.LastName<br>Gender:@item.Gender<br />Date of birth:@item.DateOfBirth<br />Course:@item.Course<br />Email:@item.Email<br />Phone number:@item.PhoneNumber<br />Address:@item.Address</p>
+
+
+
+        </div>
+
+    }
+
+</body>

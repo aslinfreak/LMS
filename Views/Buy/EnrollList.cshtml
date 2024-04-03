@@ -1,0 +1,81 @@
+﻿@model List<Learning.Models.Buy>
+
+@{
+    ViewBag.Title = "EnrollList";
+    Layout = "~/Views/Shared/_newLayout.cshtml";
+
+}
+
+<h2>EnrolledList</h2>
+
+
+
+
+<div class="container">
+
+
+    <table class="table table-success table-striped">
+
+        <thead>
+
+            <tr>
+
+                <th>Enroll ID</th>
+
+                <th>Course ID</th>
+
+             
+
+                <th>Course Name</th>
+                
+                <th>Course Fee</th>
+
+                <th>Enroll Date</th>
+
+                <th>Payment Status</th>
+
+                <th>Enroll Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var order in Model)
+
+            {
+
+                <tr>
+
+                    <td>@order.EnrollId</td>
+
+                    <td>@order.CourseId</td>
+
+                    <td>@order.CourseName</td>
+                    
+                    <td>@order.CourseFee</td>
+
+                    <td>@order.EnrollDate</td>
+
+                    <td>Paid</td>
+
+                    <td>Enrolled</td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<style>
+    body {
+        background-image: url('../Image/Student.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% 200%;
+    }
+</style>

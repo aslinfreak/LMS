@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Learning.Models.Cours>
+
+@{
+
+    ViewBag.Title = "CourseView";
+
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+
+}
+
+<style>
+
+    /* Basic styling */
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        padding: 20px;
+        background-image: url('../Image/violet.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .course {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .course h3 {
+            margin: 10px 0;
+        }
+
+        .course p {
+            color: #555;
+        }
+</style>
+
+<body>
+
+    @Html.ActionLink("Enrolled Courses", "EnrollView", "EnrollNow")
+    @foreach (var item in Model)
+
+    {
+
+        <div class="course">
+
+
+            <h3>@item.CourseName</h3>
+
+            <p>@item.Description<br>Course Code: @item.CourseCode<br>Course Fee: @item.CourseFee<br></p>
+
+            @using (Html.BeginForm("AddToCourse", "EnrollNow", new { courseId = item.CourseId, coursecode = item.CourseCode, courseName = item.CourseName, description = item.Description, courseFee = item.CourseFee }, FormMethod.Post))
+
+            {
+
+
+
+                <input type="submit" value="Enroll Now" class="btn btn-primary" onclick="this.disabled=true; this.value='Enrolling...';this.form.submit();" />
+
+            }
+
+
+        </div>
+
+    }
+
+</body>
+
+

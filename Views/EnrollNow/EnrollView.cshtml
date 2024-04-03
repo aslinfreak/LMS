@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "EnrollView";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+
+}
+@model List<Learning.Models.Cours>
+
+<h2>EnrollView</h2>
+
+@if (Model.Count == 0)
+
+{
+
+    <p>Your Enrolled cart list is empty.</p>
+    @Html.ActionLink("Back to Courses", "CourseView", "Courses")
+
+
+}
+
+else
+
+{
+
+<table class="table table-dark table-striped">
+   
+
+
+    <thead>
+
+        <tr>
+
+            <th>Course ID</th>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>CourseFee</th>
+            <th>Action</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+
+        {
+
+            <tr>
+
+                <td>@item.CourseId</td>
+                <td>@item.CourseCode</td>
+
+                <td>@item.CourseName</td>
+
+                <td>@item.Description</td>
+
+                <td>@item.CourseFee</td>
+
+
+                <td>
+
+                    @Html.ActionLink("Remove", "RemoveFromCourse", new { courseId = item.CourseId })
+                    <br />
+                    <br />
+                    @Html.ActionLink("Paynow", "Checkout", "EnrollNow", new { id = item.CourseId }, new { @class = "btn btn-primary" })
+               
+
+                </td>
+
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
+
+
+    @Html.ActionLink("Continue Enrolling", "CourseView", "Courses")
+
+    <br />
+
+    @Html.ActionLink("Clear", "ClearCourse", "EnrollNow")
+    <br />
+    
+   
+
+   
+
+    
+
+
+}
