@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LearnDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LearnDBEntities4" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminRegisters" EntityType="LearnDBModel.AdminRegister" />
+    <EntitySet Name="Buys" EntityType="LearnDBModel.Buy" />
+    <EntitySet Name="Courses" EntityType="LearnDBModel.Cours" />
+    <EntitySet Name="StudentRegisters" EntityType="LearnDBModel.StudentRegister" />
+    <AssociationSet Name="FK__Buy__CourseId__3D5E1FD2" Association="LearnDBModel.FK__Buy__CourseId__3D5E1FD2">
+      <End Role="Cours" EntitySet="Courses" />
+      <End Role="Buy" EntitySet="Buys" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AdminRegister">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Buy">
+    <Key>
+      <PropertyRef Name="EnrollId" />
+    </Key>
+    <Property Name="EnrollId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseId" Type="Int32" />
+    <Property Name="CourseName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CourseFee" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="EnrollDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cours" Relationship="LearnDBModel.FK__Buy__CourseId__3D5E1FD2" FromRole="Buy" ToRole="Cours" />
+  </EntityType>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CourseName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CourseFee" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Buys" Relationship="LearnDBModel.FK__Buy__CourseId__3D5E1FD2" FromRole="Cours" ToRole="Buy" />
+  </EntityType>
+  <EntityType Name="StudentRegister">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__Buy__CourseId__3D5E1FD2">
+    <End Type="LearnDBModel.Cours" Role="Cours" Multiplicity="0..1" />
+    <End Type="LearnDBModel.Buy" Role="Buy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cours">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="Buy">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
